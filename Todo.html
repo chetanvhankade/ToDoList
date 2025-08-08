@@ -56,8 +56,6 @@
 
   <script>
     const apiUrl = "http://localhost:8081/todos";
-
-    // Fetch and display todos from backend
     async function fetchTodos() {
       try {
         const response = await fetch(apiUrl);
@@ -82,7 +80,6 @@
       });
     }
 
-    // Add a new todo to backend (no ID sent)
     async function addTodo() {
       const titleInput = document.getElementById("todo-title");
       const statusInput = document.getElementById("todo-status");
@@ -95,8 +92,7 @@
         return;
       }
 
-      const newTodo = { title, status };  // No `id` included
-
+      const newTodo = { title, status };  
       try {
         const response = await fetch(apiUrl, {
           method: "POST",
@@ -119,9 +115,8 @@
         alert("Error adding todo. Check browser console.");
       }
     }
-
-    // Initialize on page load
     window.onload = fetchTodos;
   </script>
 </body>
+
 </html>
