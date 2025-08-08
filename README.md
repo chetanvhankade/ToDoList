@@ -6,22 +6,41 @@ This project follows the MVC architecture, ensuring a clear separation of concer
 
 Key Features:
 
-Create, view, update, and delete tasks
+! Create, view, update, and delete tasks
 
-Responsive and user-friendly interface
+! Responsive and user-friendly interface
 
-RESTful API integration with frontend
+! RESTful API integration with frontend
 
-PostgreSQL database for secure and efficient data storage
+! PostgreSQL database for secure and efficient data storage
 
-Follows MVC architecture for clean code organization
+! Follows MVC architecture for clean code organization
 
 Technologies Used:
 
-Backend: Java, Spring Boot, REST API
+! Backend: Java, Spring Boot, REST API
 
-Frontend: HTML, CSS, JavaScript
+! Frontend: HTML, CSS, JavaScript
 
-Database: PostgreSQL
+! Database: PostgreSQL
+
+ 📸 Screenshots
+
+
+ <img width="552" height="402" alt="todohtml" src="https://github.com/user-attachments/assets/b6f99cd1-d12f-480b-a19d-86df483f23e3" />
+
+
+
+
+
+
+
+
+
+
+
+ <img width="1545" height="833" alt="todojava" src="https://github.com/user-attachments/assets/b10e975a-9521-489c-9af3-ce10077d2bb4" />
+
+
 
 
