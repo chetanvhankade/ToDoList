@@ -149,7 +149,7 @@
     async function editTodo(todo)
       {
       const newTitle = prompt("Edit title:", todo.title);
-      if (newTitle === null) return; // Cancelled
+      if (newTitle === null) return;
       const newStatus = confirm("Mark as completed? Click OK for Yes, Cancel for No");
 
       const updatedTodo = { title: newTitle.trim(), status: newStatus };
@@ -173,3 +173,4 @@
   </script>
 </body>
 </html>
+
