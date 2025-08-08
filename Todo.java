@@ -14,8 +14,6 @@ public class Todo {
 
     private boolean status;
 
-    // Getters and Setters
-
     public Long getId() {
         return id;
     }
@@ -39,4 +37,5 @@ public class Todo {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
 }
