@@ -68,7 +68,7 @@ Technologies Used:
 🛢️ Database Schema:
 
 
-CREATE TABLE users (
+CREATE Table todo (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     status boolean default false,
