@@ -15,21 +15,15 @@ public class TodoController {
 
     @Autowired
     private TodoRepository todoRepo;
-
-    // GET: /todos
     @GetMapping
     public List<Todo> getAllTodos() {
         return todoRepo.findAll();
     }
-
-    // POST: /todos
     @PostMapping
     public ResponseEntity<Todo> addTodo(@RequestBody Todo todo) {
         Todo savedTodo = todoRepo.save(todo);
         return ResponseEntity.ok(savedTodo);
     }
-
-    // PUT: /todos/{id}
     @PutMapping("/{id}")
     public ResponseEntity<Todo> updateTodo(@PathVariable Long id, @RequestBody Todo todo) {
         return todoRepo.findById(id)
@@ -41,8 +35,6 @@ public class TodoController {
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
-
-    // DELETE: /todos/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         if (!todoRepo.existsById(id)) {
@@ -51,4 +43,5 @@ public class TodoController {
         todoRepo.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }
