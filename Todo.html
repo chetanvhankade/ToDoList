@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ToDo List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 30px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 250px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-left: 10px;
+    }
+
+    #todo-list {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 420px;
+    }
+
+    .todo-item {
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      padding: 10px;
+      background-color: #f8f8f8;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      max-width: 400px;
+      width: 100%;
+      margin-left: 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>ToDo List</h1>
+  <input type="text" id="todo-title" placeholder="Enter todo title" />
+  <label>
+    <input type="checkbox" id="todo-status" /> Completed
+  </label>
+  <button onclick="addTodo()">Add Todo</button>
+
+  <div id="todo-list"></div>
+
+  <script>
+    const apiUrl = "http://localhost:8081/todos";
+
+    // Fetch and display todos from backend
+    async function fetchTodos() {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
+        const todos = await response.json();
+        displayTodos(todos.reverse());
+      } catch (error) {
+        console.error("Error fetching todos:", error);
+        alert("Error fetching todos. Is the backend running?");
+      }
+    }
+
+    // Render todos to the UI
+    function displayTodos(todos) {
+      const list = document.getElementById("todo-list");
+      list.innerHTML = "";
+      todos.forEach(todo => {
+        const item = document.createElement("div");
+        item.className = "todo-item";
+        item.textContent = `Title: ${todo.title} | Completed: ${todo.status}`;
+        list.appendChild(item);
+      });
+    }
+
+    // Add a new todo to backend (no ID sent)
+    async function addTodo() {
+      const titleInput = document.getElementById("todo-title");
+      const statusInput = document.getElementById("todo-status");
+
+      const title = titleInput.value.trim();
+      const status = statusInput.checked;
+
+      if (!title) {
+        alert("Title cannot be empty.");
+        return;
+      }
+
+      const newTodo = { title, status };  // No `id` included
+
+      try {
+        const response = await fetch(apiUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newTodo),
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error("Error from server:", errorText);
+          throw new Error("Failed to add todo.");
+        }
+
+        console.log("Todo added successfully.");
+        titleInput.value = "";
+        statusInput.checked = false;
+        await fetchTodos();
+      } catch (err) {
+        console.error("Error adding todo:", err);
+        alert("Error adding todo. Check browser console.");
+      }
+    }
+
+    // Initialize on page load
+    window.onload = fetchTodos;
+  </script>
+</body>
+</html>
